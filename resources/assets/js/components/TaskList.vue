@@ -15,12 +15,25 @@
             }
         },
 
-        mounted() {
-            const resource = this.$resource('/api/tasks/{/id}');
-            resource.get().then(response => response.json())
-                    .then(json => {
-                        this.tasks = json;
-                    })
+        components: {
+            task: require('./Task.vue')
+        },
+
+        created() {
+            this.fetchTasks();
+        },
+
+        methods: {
+            api() {
+                return this.$resource('/api/tasks/{/id}')
+            },
+            fetchTasks() {
+                this.api().get()
+                        .then(response => response.json())
+                        .then(json => {
+                            this.tasks = json;
+                        })
+            }
         }
     }
 </script>
