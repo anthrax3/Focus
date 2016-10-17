@@ -1,6 +1,11 @@
 <template>
     <div class="task-list">
         <h1>My Tasks</h1>
+        <form @submit.prevent="addTask">
+            <div class="form-group">
+                <input type="text" v-model="newTask" class="form-control" id="add-task" placeholder="Task...">
+            </div>
+        </form>
         <ul class="list-group">
             <task v-for="task in tasks" :task="task"></task>
         </ul>
@@ -11,7 +16,8 @@
     export default {
         data() {
             return {
-                tasks: []
+                tasks: [],
+                newTask: ''
             }
         },
 
@@ -32,6 +38,16 @@
                         .then(response => response.json())
                         .then(json => {
                             this.tasks = json;
+                        })
+            },
+            addTask() {
+                this.api().save({
+                    title: this.newTask
+                })
+                        .then(response => response.json())
+                        .then(json => {
+                            this.tasks.unshift(json);
+                            this.newTask = '';
                         })
             }
         }

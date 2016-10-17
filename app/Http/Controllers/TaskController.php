@@ -22,7 +22,7 @@ class TaskController extends Controller
 
     public function store()
     {
-
+        return Task::create(Input::get());
     }
 
     public function edit(Task $task)

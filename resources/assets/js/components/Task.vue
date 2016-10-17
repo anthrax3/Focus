@@ -1,6 +1,6 @@
 <template>
     <li class="list-group-item">
-        <input type="checkbox" :id="task.id" :checked="task.completed" @click="toggleCompleted"/>
+        <input type="checkbox" :id="task.id" v-model="task.completed" @click="toggleCompleted"/>
         <label :for="task.id" :class="{ 'task--completed': task.completed }">{{ task.title }}</label>
     </li>
 </template>
@@ -13,7 +13,7 @@
                 this.$http.put(`/api/tasks/${this.task.id}`, {
                     completed: !this.task.completed
                 }).then(response => response.json()).then(json => {
-                    this.task.completed = json.completed
+                    // @todo: complete
                 })
             }
         }
