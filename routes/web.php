@@ -5,3 +5,4 @@ Route::get('/', function () {
 });
 
 Route::get('api/tasks', 'TaskController@index');
+Route::put('api/tasks/{task}', 'TaskController@update');

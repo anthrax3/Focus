@@ -10,7 +10,11 @@
         props: ['task'],
         methods: {
             toggleCompleted() {
-                this.task.completed = !this.task.completed;
+                this.$http.put(`/api/tasks/${this.task.id}`, {
+                    completed: !this.task.completed
+                }).then(response => response.json()).then(json => {
+                    this.task.completed = json.completed
+                })
             }
         }
     }

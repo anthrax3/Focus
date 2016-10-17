@@ -6,6 +6,7 @@ use App\Task;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 
 class TaskController extends Controller
 {
@@ -31,7 +32,8 @@ class TaskController extends Controller
 
     public function update(Task $task)
     {
-
+        $task->update(Input::get());
+        return $task;
     }
 
     public function destroy(Task $task)
