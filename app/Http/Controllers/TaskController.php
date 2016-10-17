@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return Task::all();
+        return Task::query()->orderBy('completed')->get();
     }
 
     public function create()

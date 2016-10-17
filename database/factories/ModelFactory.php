@@ -25,6 +25,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Task::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->name
+        'title' => $faker->sentence()
     ];
 });

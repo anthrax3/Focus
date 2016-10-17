@@ -2,7 +2,7 @@
     <div class="task-list">
         <h1>My Tasks</h1>
         <ul class="list-group">
-            <task v-for="task in tasks" :title="task.title"></task>
+            <task v-for="task in tasks" :task="task"></task>
         </ul>
     </div>
 </template>
