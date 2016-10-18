@@ -20,7 +20,7 @@
     }
 </script>
 
-<style>
+<style lang="sass">
     .task--completed {
         text-decoration: line-through;
     }
