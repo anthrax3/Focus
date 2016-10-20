@@ -1,5 +1,5 @@
 <template>
-    <li class="list-group-item">
+    <li :class="{ 'slds-item': 1,  'task--prioritised': task.prioritised }">
         <input type="checkbox" :id="task.id" v-model="task.completed" @click="toggleCompleted"/>
         <label :for="task.id" :class="{ 'task--completed': task.completed }">{{ task.title }}</label>
     </li>
@@ -23,5 +23,9 @@
 <style lang="sass">
     .task--completed {
         text-decoration: line-through;
+    }
+
+    .task--prioritised {
+        background: lighten(yellow, 30%) !important;
     }
 </style>

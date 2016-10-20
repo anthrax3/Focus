@@ -1,12 +1,17 @@
 <template>
     <div class="task-list">
-        <h1>My Tasks</h1>
+        <h1 class="slds-text-heading--large">My Tasks</h1>
         <form @submit.prevent="addTask">
-            <div class="form-group">
-                <input type="text" v-model="newTask" class="form-control" id="add-task" placeholder="Task...">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <input v-model="title" id="new-task-title" class="slds-input" type="text" placeholder="Task..." />
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <button type="button" class="slds-button slds-button--brand">Add</button>
             </div>
         </form>
-        <ul class="list-group">
+        <ul class="slds-has-dividers--top-space">
             <task v-for="task in tasks" :task="task"></task>
         </ul>
     </div>
@@ -17,7 +22,9 @@
         data() {
             return {
                 tasks: [],
-                newTask: ''
+                title: '',
+                dueDate: '',
+                dueTime: ''
             }
         },
 
@@ -42,12 +49,15 @@
             },
             addTask() {
                 this.api().save({
-                    title: this.newTask
+                    title: this.title,
+//                    dueDate: this.dueDate + 'T' + this.dueTime
                 })
                         .then(response => response.json())
                         .then(json => {
                             this.tasks.unshift(json);
-                            this.newTask = '';
+                            this.title = '';
+//                            this.dueDate = '';
+//                            this.dueTime = '';
                         })
             }
         }
