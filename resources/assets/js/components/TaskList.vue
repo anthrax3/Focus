@@ -14,14 +14,14 @@
                 </div>
             </div>
         </div>
-        <form @submit.prevent="addTask" v-show="showAddTask">
+        <form @submit.prevent="addTask" v-show="showAddTask" class="task-add-form">
             <div class="slds-form-element">
                 <div class="slds-form-element__control">
-                    <input v-model="title" id="new-task-title" class="slds-input" type="text" placeholder="Task..."/>
+                    <input v-model="newTask.title" id="new-task-title" class="slds-input" type="text" placeholder="Task..."/>
                 </div>
             </div>
             <div class="slds-form-element">
-                <button type="button" class="slds-button slds-button--brand">Add</button>
+                <button type="submit" class="slds-button slds-button--brand">Add</button>
             </div>
         </form>
         <ul class="slds-has-dividers--top-space">
@@ -36,9 +36,10 @@
             return {
                 showAddTask: false,
                 tasks: [],
-                title: '',
-                dueDate: '',
-                dueTime: ''
+                newTask: {
+                    title: '',
+                    priority: false
+                }
             }
         },
 
@@ -63,15 +64,12 @@
             },
             addTask() {
                 this.api().save({
-                    title: this.title,
-//                    dueDate: this.dueDate + 'T' + this.dueTime
+                    title: this.newTask.title,
                 })
                         .then(response => response.json())
                         .then(json => {
                             this.tasks.unshift(json);
                             this.title = '';
-//                            this.dueDate = '';
-//                            this.dueTime = '';
                         })
             }
         }
@@ -85,5 +83,8 @@
     .task-add-button {
         width: 100%;
         height: 100%;
+    }
+    .task-add-form {
+        padding: 5px;
     }
 </style>

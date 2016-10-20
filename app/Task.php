@@ -26,4 +26,23 @@ class Task extends Model
         'completed',
         'prioritised',
     ];
+
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = [
+        'id',
+        'title',
+        'description',
+        'sort',
+        'dueDate',
+        'deferDate',
+        'completedDate',
+        'completed',
+        'prioritised',
+        'updated_at',
+        'created_at'
+    ];
 }

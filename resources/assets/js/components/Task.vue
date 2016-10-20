@@ -18,7 +18,7 @@
                 this.$http.put(`/api/tasks/${this.task.id}`, {
                     completed: !this.task.completed
                 }).then(response => response.json()).then(json => {
-                    // @todo: complete
+                    this.task.completed = json.completed;
                 })
             }
         }

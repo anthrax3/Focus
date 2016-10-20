@@ -30,8 +30,17 @@ class TaskController extends Controller
     public function store()
     {
         $input = Input::get();
-//        $input['dueDate'] = Carbon::createFromFormat('Y-m-d H:i', $input['dueDate']);
-        return Task::create($input);
+        $responseTemplate = [
+            'description'   => '',
+            'sort'          => 0,
+            'dueDate'       => null,
+            'deferDate'     => null,
+            'completedDate' => null,
+            'completed'     => false,
+            'prioritised'   => false,
+        ];
+
+        return array_merge($responseTemplate, Task::create($input)->toArray());
     }
 
     public function edit(Task $task)
@@ -42,6 +51,7 @@ class TaskController extends Controller
     public function update(Task $task)
     {
         $task->update(Input::get());
+
         return $task;
     }
 
