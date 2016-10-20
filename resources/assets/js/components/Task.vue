@@ -1,7 +1,12 @@
 <template>
     <li :class="{ 'slds-item': 1,  'task--prioritised': task.prioritised }">
-        <input type="checkbox" :id="task.id" v-model="task.completed" @click="toggleCompleted"/>
-        <label :for="task.id" :class="{ 'task--completed': task.completed }">{{ task.title }}</label>
+        <span class="slds-checkbox">
+            <input type="checkbox" :id="task.id" v-model="task.completed" @click="toggleCompleted"/>
+            <label class="slds-checkbox__label" :for="task.id">
+                <span class="slds-checkbox--faux"></span>
+                <span :class="{ 'slds-form-element__label': 1, 'task--completed': task.completed }">{{ task.title }}</span>
+            </label>
+        </span>
     </li>
 </template>
 

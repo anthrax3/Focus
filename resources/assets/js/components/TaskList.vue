@@ -1,10 +1,23 @@
 <template>
     <div class="task-list">
-        <h1 class="slds-text-heading--large">My Tasks</h1>
+        <div class="task-list-header slds-grid">
+            <div>
+                <h1 class="task-list-title slds-text-heading--large">My Tasks</h1>
+            </div>
+            <div class="slds-col--bump-left">
+                <div class="task-add-button slds-align--absolute-center">
+                    <button class="slds-button slds-button--brand">
+                        <svg aria-hidden="true" class="slds-button__icon--stateful">
+                            <use xlink:href="icons/utility-sprite/svg/symbols.svg#add"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
         <form @submit.prevent="addTask">
             <div class="slds-form-element">
                 <div class="slds-form-element__control">
-                    <input v-model="title" id="new-task-title" class="slds-input" type="text" placeholder="Task..." />
+                    <input v-model="title" id="new-task-title" class="slds-input" type="text" placeholder="Task..."/>
                 </div>
             </div>
             <div class="slds-form-element">
@@ -63,3 +76,13 @@
         }
     }
 </script>
+
+<style lang="sass">
+    .task-list-header {
+        padding: 5px;
+    }
+    .task-add-button {
+        width: 100%;
+        height: 100%;
+    }
+</style>
