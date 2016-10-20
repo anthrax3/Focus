@@ -6,7 +6,7 @@
             </div>
             <div class="slds-col--bump-left">
                 <div class="task-add-button slds-align--absolute-center">
-                    <button class="slds-button slds-button--brand">
+                    <button class="slds-button slds-button--brand" @click="showAddTask = !showAddTask">
                         <svg aria-hidden="true" class="slds-button__icon--stateful">
                             <use xlink:href="icons/utility-sprite/svg/symbols.svg#add"></use>
                         </svg>
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <form @submit.prevent="addTask">
+        <form @submit.prevent="addTask" v-show="showAddTask">
             <div class="slds-form-element">
                 <div class="slds-form-element__control">
                     <input v-model="title" id="new-task-title" class="slds-input" type="text" placeholder="Task..."/>
@@ -34,6 +34,7 @@
     export default {
         data() {
             return {
+                showAddTask: false,
                 tasks: [],
                 title: '',
                 dueDate: '',

@@ -29,7 +29,6 @@
     .task--completed {
         text-decoration: line-through;
     }
-
     .task--prioritised {
         background: lighten(yellow, 30%) !important;
     }
