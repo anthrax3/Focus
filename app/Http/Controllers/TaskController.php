@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,7 +13,13 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return Task::query()->orderBy('completed')->get();
+        return Task::query()
+            ->orderBy('completed')
+            ->orderBy('prioritised', 'desc')
+            ->orderBy('sort')
+            ->orderBy('dueDate')
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function create()
@@ -22,7 +29,9 @@ class TaskController extends Controller
 
     public function store()
     {
-        return Task::create(Input::get());
+        $input = Input::get();
+//        $input['dueDate'] = Carbon::createFromFormat('Y-m-d H:i', $input['dueDate']);
+        return Task::create($input);
     }
 
     public function edit(Task $task)
