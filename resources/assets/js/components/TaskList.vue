@@ -6,7 +6,7 @@
             </div>
             <div class="slds-col--bump-left">
                 <div class="task-add-button slds-align--absolute-center">
-                    <button class="slds-button slds-button--brand" @click="showAddTask = !showAddTask">
+                    <button class="slds-button slds-button--neutral" @click="toggleAddForm">
                         <svg aria-hidden="true" class="slds-button__icon--stateful">
                             <use xlink:href="icons/utility-sprite/svg/symbols.svg#add"></use>
                         </svg>
@@ -15,9 +15,10 @@
             </div>
         </div>
         <form @submit.prevent="addTask" v-show="showAddTask" class="task-add-form">
-            <div class="slds-form-element">
+            <div class="task-add-form__title slds-form-element">
                 <div class="slds-form-element__control">
-                    <input v-model="newTask.title" id="new-task-title" class="slds-input" type="text" placeholder="Task..."/>
+                    <input v-model="newTask.title" id="new-task-title" class="slds-input" type="text"
+                           placeholder="Task..."/>
                 </div>
             </div>
             <div class="slds-form-element">
@@ -49,6 +50,7 @@
 
         created() {
             this.fetchTasks();
+            this.getInitialAddFormState();
         },
 
         methods: {
@@ -71,6 +73,13 @@
                             this.tasks.unshift(json);
                             this.title = '';
                         })
+            },
+            toggleAddForm() {
+                this.showAddTask = !this.showAddTask;
+                localStorage.setItem('add-form-state', this.showAddTask);
+            },
+            getInitialAddFormState() {
+                this.showAddTask = localStorage.getItem('add-form-state') || false;
             }
         }
     }
@@ -80,11 +89,19 @@
     .task-list-header {
         padding: 5px;
     }
+
     .task-add-button {
         width: 100%;
         height: 100%;
     }
+
     .task-add-form {
+        display: flex;
         padding: 5px;
+    }
+
+    .task-add-form__title {
+        flex-grow: 1;
+        margin-right: 0.5rem;
     }
 </style>
